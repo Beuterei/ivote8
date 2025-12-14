@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  ivote8:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - redis
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET?Missing environment variable see readme}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - 3000
+    restart: unless-stopped
+
+  redis:
+    image: redis:8.0-alpine
+    ports:
+      - 6379
+    restart: unless-stopped
+    volumes:
+      - redisData:/data
+
+volumes:
+  redisData:

@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  ivote8:
+    build:
+      target: build
+    command: ["npm", "run", "dev"]
+    container_name: ivote8Dev
+    environment:
+      FORCE_COLOR: 1
+    ports:
+      - 3000:3000
+    volumes:
+      - ./messages:/app/messages
+      - ./project.inlang:/app/project.inlang
+      - ./public:/app/public
+      - ./src:/app/src
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./vite.config.ts:/app/vite.config.ts
+
+  redis:
+    container_name: ivote8RedisDev
+    environment:
+      FORCE_COLOR: 1

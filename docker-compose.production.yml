@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  ivote8:
+    container_name: ivote8Prod
+    environment:
+      LETSENCRYPT_HOST: ${IVOTE8_HOST:?Missing environment variable see readme}
+      VIRTUAL_HOST: ${IVOTE8_HOST?Missing environment variable see readme}
+      VIRTUAL_PORT: 3000
+    networks:
+      - default
+      - nginxproxynet
+
+  redis:
+    container_name: ivote8RedisProd
+
+networks:
+  nginxproxynet:
+    external: true
+    name: nginxproxynet
