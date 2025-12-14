@@ -23,6 +23,6 @@ RUN NODE_ENV=production \
 
 FROM base
 
-COPY --from=build-production .output ./.output
+COPY --from=build-production /app/.output ./.output
 
 CMD ["node", ".output/server/index.mjs"]
